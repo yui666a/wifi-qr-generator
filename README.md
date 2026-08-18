@@ -8,6 +8,7 @@ https://yui666a.github.io/wifi-qr-generator/
 ## できること
 
 - SSID・パスワード・暗号化方式（WPA/WEP/暗号化なし）から QR コードを生成
+- QR コード中央に Wi-Fi 公式ロゴを配置
 - ステルス SSID（非公開ネットワーク）に対応
 - PNG でのダウンロード
 - 印刷用カードの出力（QR とネットワーク名・パスワードを併記）
@@ -65,3 +66,13 @@ pnpm build        # 静的ビルド → dist/client
 TanStack Start の公式ドキュメントに静的ホスティング向けの記載はなく、この構成は
 `vite` の `base` と `router.basepath` の双方を揃えることで動かしています。
 片方だけではプリレンダのクロール起点がずれて失敗します。
+
+## 商標
+
+QR コード中央の Wi-Fi ロゴは、Wi-Fi Alliance が
+[ライセンスフリーで提供している Wi-Fi Cube Logo](https://www.wi-fi.org/our-brands) を使用しています。
+
+Wi-Fi®、Wi-Fi CERTIFIED®、Wi-Fi Alliance®、Wi-Fi ロゴは Wi-Fi Alliance の商標です。
+本ツールは Wi-Fi Alliance とは無関係であり、認証を受けたものでもありません。
+
+「QRコード」は株式会社デンソーウェーブの登録商標です。
