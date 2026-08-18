@@ -13,7 +13,11 @@ export const Route = createRootRoute({
 					"SSID とパスワードから WiFi 接続用の QR コードを作成します。入力はブラウザ内だけで処理され、どこにも送信されません。",
 			},
 		],
-		links: [{ rel: "stylesheet", href: appCss }],
+		links: [
+			{ rel: "stylesheet", href: appCss },
+			// GitHub Pages ではリポジトリ名配下に配信されるため、BASE_URL を前置する
+			{ rel: "icon", type: "image/svg+xml", href: `${import.meta.env.BASE_URL}favicon.svg` },
+		],
 	}),
 	component: RootComponent,
 });
