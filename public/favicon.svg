@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+	<title>WiFi QR ジェネレーター</title>
 	<rect width="32" height="32" rx="6" fill="#0f172a"/>
 	<g fill="#f8fafc">
 		<path d="M6 6h8v8H6V6zm2 2v4h4V8H8z"/>
