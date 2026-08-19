@@ -127,10 +127,8 @@ function BulkPanel() {
 	const entries = result.entries;
 	const autoPerPage = pickPerPage(entries.length);
 	const perPage = manualPerPage ?? autoPerPage;
-	const columns =
-		PER_PAGE_CHOICES.find((choice) => choice.perPage === perPage)?.columns ??
-		PER_PAGE_CHOICES[0]?.columns ??
-		2;
+	const layout =
+		PER_PAGE_CHOICES.find((choice) => choice.perPage === perPage) ?? PER_PAGE_CHOICES[0];
 
 	useEffect(() => {
 		let cancelled = false;
@@ -191,7 +189,13 @@ function BulkPanel() {
 
 			<div className="print-sheets hidden">
 				{pages.map((page, index) => (
-					<PrintSheet key={page[0]?.key ?? `page-${index}`} cards={page} columns={columns} />
+					<PrintSheet
+						key={page[0]?.key ?? `page-${index}`}
+						cards={page}
+						columns={layout?.columns ?? 2}
+						rows={layout?.rows ?? 3}
+						qrWidthMm={layout?.qrWidthMm ?? 32}
+					/>
 				))}
 			</div>
 		</>
