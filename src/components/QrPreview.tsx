@@ -1,3 +1,5 @@
+import { printPage } from "../lib/print";
+
 type Props = {
 	svgDataUrl: string;
 	pngDataUrl: string;
@@ -19,7 +21,7 @@ export function QrPreview({ svgDataUrl, pngDataUrl, fileName }: Props) {
 				<button
 					type="button"
 					className="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium hover:bg-slate-100"
-					onClick={() => window.print()}
+					onClick={printPage}
 				>
 					カードを印刷
 				</button>

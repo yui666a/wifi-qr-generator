@@ -7,6 +7,7 @@ import { QrPreview } from "../components/QrPreview";
 import { WifiForm } from "../components/WifiForm";
 import { PER_PAGE_CHOICES, paginate, pickPerPage } from "../lib/paperLayout";
 import { parseWifiCsv } from "../lib/parseWifiCsv";
+import { printPage } from "../lib/print";
 import { toPngDataUrl, toSvgDataUrl } from "../lib/qr";
 import { buildWifiPayload, type WifiConfig } from "../lib/wifiPayload";
 
@@ -103,7 +104,7 @@ function SinglePanel() {
 			</div>
 
 			{qr && (
-				<div className="print-card hidden">
+				<div className="print-only print-card">
 					<div className="w-[110mm]">
 						<PrintCard
 							svgDataUrl={qr.svg}
@@ -180,14 +181,14 @@ function BulkPanel() {
 					<button
 						type="button"
 						className="mt-4 rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700"
-						onClick={() => window.print()}
+						onClick={printPage}
 					>
 						印刷（A4 {pages.length} 枚）
 					</button>
 				)}
 			</div>
 
-			<div className="print-sheets hidden">
+			<div className="print-only print-sheets">
 				{pages.map((page, index) => (
 					<PrintSheet
 						key={page[0]?.key ?? `page-${index}`}
