@@ -7,12 +7,27 @@
 		display: none;
 	}
 
+	/* 画面用の余白と横幅制限が残るとカードが中央からずれるため、印刷では解除する */
+	body main {
+		max-width: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	/* 画面用の背景色は紙では無駄なインクになるうえ、カードの白と紛れる */
+	body {
+		background: #ffffff;
+	}
+
+	/* position: fixed はビューポート基準の固定でページボックスと噛み合わず、
+	   はみ出した分が上端で切れる。通常フローのまま中央に置く。
+	   高さに 100vh を使うと @page の余白ぶん下へ押し出されるので、
+	   余白を引いたページボックスの高さを基準にする */
 	body .print-card.print-card {
-		position: fixed;
-		inset: 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		min-height: calc(297mm - 32mm);
 	}
 }
 
