@@ -1,14 +1,21 @@
 @import "tailwindcss";
 
-/* 印刷時は画面用 UI を落としてカードだけを残す。Tailwind の hidden ユーティリティを
-   打ち消す必要があるため、セレクタを重ねて詳細度で勝たせている（!important は使わない） */
+/* 印刷用の要素は Tailwind の hidden ではなくこのクラスで隠す。hidden と
+   @media print の display 指定が詳細度で綱引きになり、環境によって
+   印刷側が負けて画面がそのまま出力されることがあったため */
+@media screen {
+	.print-only {
+		display: none;
+	}
+}
+
 @media print {
-	body .no-print {
+	.no-print {
 		display: none;
 	}
 
 	/* 画面用の余白と横幅制限が残るとカードが中央からずれるため、印刷では解除する */
-	body main {
+	main {
 		max-width: none;
 		margin: 0;
 		padding: 0;
@@ -22,32 +29,29 @@
 	/* 1 件だけのときは 1 枚の中央に置く。position: fixed はビューポート基準の固定で
 	   ページボックスと噛み合わず上端で切れるため使わない。100vh も @page の余白ぶん
 	   下へ押し出されるので、余白を引いたページボックスの高さを基準にする */
-	body .print-card.print-card {
+	.print-card {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		min-height: calc(297mm - 32mm);
 	}
 
-	body .print-sheets.print-sheets {
+	.print-sheets {
 		display: block;
 	}
 
-	/* 複数件はページごとに敷き詰める。最後の 1 枚に余計な白紙が続かないよう、
-	   改ページは間だけに入れる。
-	   行高はページ高からの均等割りで固定する。カードの内容なりに伸ばすと、
-	   合計がページ高を数 mm 超えた時点で最終行が次ページへ溢れる */
 	/* 行高はページを行数で割った値に固定する。1fr で等分すると、件数が 1 枚の
 	   上限に満たないときに残りの行ぶんまでカードが引き伸ばされて間延びする。
 	   逆に内容なりに伸ばすと、合計がページ高を数 mm 超えて最終行が溢れる */
-	body .print-sheet {
+	.print-sheet {
 		height: calc(297mm - 32mm);
 		grid-auto-rows: calc((297mm - 32mm - (var(--sheet-rows) - 1) * 0.75rem) / var(--sheet-rows));
 		align-content: start;
 		overflow: hidden;
 	}
 
-	body .print-sheet + .print-sheet {
+	/* 最後の 1 枚に余計な白紙が続かないよう、改ページは間だけに入れる */
+	.print-sheet + .print-sheet {
 		break-before: page;
 	}
 }
