@@ -37,10 +37,13 @@
 	   改ページは間だけに入れる。
 	   行高はページ高からの均等割りで固定する。カードの内容なりに伸ばすと、
 	   合計がページ高を数 mm 超えた時点で最終行が次ページへ溢れる */
+	/* 行高はページを行数で割った値に固定する。1fr で等分すると、件数が 1 枚の
+	   上限に満たないときに残りの行ぶんまでカードが引き伸ばされて間延びする。
+	   逆に内容なりに伸ばすと、合計がページ高を数 mm 超えて最終行が溢れる */
 	body .print-sheet {
 		height: calc(297mm - 32mm);
-		grid-auto-rows: 1fr;
-		align-content: stretch;
+		grid-auto-rows: calc((297mm - 32mm - (var(--sheet-rows) - 1) * 0.75rem) / var(--sheet-rows));
+		align-content: start;
 		overflow: hidden;
 	}
 

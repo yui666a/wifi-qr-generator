@@ -28,6 +28,12 @@ describe("pickPerPage", () => {
 	it("選べる配置は 1 枚あたりの件数として昇順に並ぶ", () => {
 		expect(PER_PAGE_CHOICES.map((choice) => choice.perPage)).toEqual([6, 8, 12]);
 	});
+
+	it("どの配置も列数 × 行数が 1 枚あたりの件数に一致する", () => {
+		for (const choice of PER_PAGE_CHOICES) {
+			expect(choice.columns * choice.rows).toBe(choice.perPage);
+		}
+	});
 });
 
 describe("paginate", () => {
